@@ -84,20 +84,25 @@ check1 = tests_ 1
 
 -- if-then-else
 numToBase :: Integer -> Integer -> [Integer]
-numToBase n b = undefined
+numToBase n b = if n == 0 
+                    then [] 
+                    else numToBase (quot n b) b ++ [mod n b]
 
 -- pattern matching
 numToBase2 :: Integer -> Integer -> [Integer]
 numToBase2 0 _ = []
-numToBase2 n b = undefined
+numToBase2 n b = numToBase2 (quot n b) b ++ [mod n b]
 
 -- gărzi
 numToBase3 :: Integer -> Integer -> [Integer]
-numToBase3 n b = undefined
+numToBase3 n b 
+    | n == 0 = []
+    | otherwise = numToBase3 (quot n b) b ++ [mod n b]
 
 -- case of
 numToBase4 :: Integer -> Integer -> [Integer]
-numToBase4 n b = undefined
+numToBase4 n b = case n of 
+    0 -> []
 
 -- Verificare: check2
 check2 :: TestData
@@ -123,7 +128,7 @@ check2 = tests_ 2
 -}
 
 removeDuplicatesLeft :: (Eq a) => [a] -> [a]
-removeDuplicatesLeft l = undefined
+removeDuplicatesLeft l = reverse (foldl (\acc x -> if elem x acc then acc else (x : acc)) [] l)
 
 -- Verificare: check3
 check3 :: TestData
