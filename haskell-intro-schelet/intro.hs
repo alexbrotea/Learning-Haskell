@@ -26,28 +26,34 @@ import Data.Char
 
 -- if-then-else
 reverseList :: [a] -> [a]
-reverseList l = undefined
+reverseList l = if null l 
+                    then [] 
+                    else reverseList (tail l) ++ [head l]
 
 -- pattern matching
 reverseList2 :: [a] -> [a]
 reverseList2 [] = []
-reverseList2 (x : xl) = undefined
+reverseList2 (x : xl) = reverseList2 xl ++ [x]
 
 -- case of
 reverseList3 :: [a] -> [a]
-reverseList3 l = undefined
+reverseList3 l = case l of
+    [] -> []
+    (x : xl) -> reverseList3 xl ++ [x]
 
 -- gărzi
 reverseList4 :: [a] -> [a]
-reverseList4 l = undefined
+reverseList4 l
+    | null l = []
+    | otherwise = reverseList4 (tail l) ++ [head l]
 
 -- foldl
 reverseList5 :: [a] -> [a]
-reverseList5 l = undefined
+reverseList5 l = foldl (\acc x -> x : acc) [] l
 
 -- foldr
 reverseList6 :: [a] -> [a]
-reverseList6 l = undefined
+reverseList6 l = foldr (\x acc -> acc ++ [x]) [] l
 
 -- Verificare: check1
 check1 :: TestData
