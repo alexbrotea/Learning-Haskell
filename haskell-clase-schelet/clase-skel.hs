@@ -110,8 +110,15 @@ check1 = tests_ 1 $
 
 -}
 
+printLevel :: Show a => Char -> Int -> BST a -> [Char]
+printLevel _ _ BSTNil = ""
+printLevel tab level (BSTNod root left right) = replicate level tab ++ show root ++ "\n"
+    ++ printLevel tab (level + 1) left
+    ++ printLevel tab (level + 1) right
+
 instance Show a => Show (BST a) where
-    show tree = undefined
+    show BSTNil = ""
+    show node@BSTNod{} = printLevel '\t' 0 node
 
 check2 :: TestData
 check2 = tests_ 2 $
