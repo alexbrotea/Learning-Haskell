@@ -75,7 +75,9 @@ root = foldl insertElem BSTNil [7, 4, 12, 2, 3, 1, 10, 15, 8]
 -}
 
 instance Eq a => Eq (BST a) where
-    (==) tree1 tree2 = undefined
+    (==) BSTNil BSTNil = True
+    (==) (BSTNod e1 l1 r1) (BSTNod e2 l2 r2) = e1 == e2 && l1 == l2 && r1 == r2
+    (==) _ _ = False
 
 check1 :: TestData
 check1 = tests_ 1 $
