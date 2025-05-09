@@ -152,7 +152,8 @@ check3 = tests_ 3 $
 -}
 
 instance Invertible (BST a) where
-    invert tree = undefined
+    invert BSTNil = BSTNil
+    invert (BSTNod a left right) = BSTNod a (invert right) (invert left)
 
 check4 :: TestData
 check4 = tests_ 4 $
